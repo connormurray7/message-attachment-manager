@@ -22,7 +22,7 @@ class ImageDirectoryLoader: NSObject {
     private var videoAndAudioArray: [ImageFile] = []
     private var otherArray:         [ImageFile] = []
     
-    var singleSectionMode = false
+    var singleSectionMode = true
     
     func getTotalSizeInBytes() -> Int64 {
         return totalSizeInBytes
@@ -142,24 +142,24 @@ class ImageDirectoryLoader: NSObject {
                 try fileMgr.createDirectoryAtPath(trashPath.absoluteString, withIntermediateDirectories: false, attributes: [:])
             }
             catch {
-                print("Could not create directory")
+                print("Could not create directory \(error)")
+            }
         }
+        //THIS MUST EXECUTE
+        databaseManager.prepareForDeletes()
+        for i in indexPaths {
+            file = infoForIndexPath(i)
+            // Move the files to the trash.
+            do {
+                try fileMgr.moveItemAtURL(file.fullPath, toURL: NSURL(fileURLWithPath: file.name, relativeToURL: trashPath))
+            }
+            catch let error as NSError {
+                print("Here is the error: \(error)")
+            }
+            // Delete from the database.
+            databaseManager.deleteByGUID(file.GUID)
+        }
+        //AND THIS MUST EXECUTE
+        databaseManager.finishedDeleting()
     }
-    //THIS MUST EXECUTE
-    databaseManager.prepareForDeletes()
-    for i in indexPaths {
-        file = infoForIndexPath(i)
-        // Move the files to the trash.
-        do {
-            try fileMgr.moveItemAtURL(file.fullPath, toURL: NSURL(fileURLWithPath: file.name, relativeToURL: trashPath))
-        }
-        catch let error as NSError {
-            print("Here is the error: \(error)")
-        }
-        // Delete from the database.
-        databaseManager.deleteByGUID(file.GUID)
-    }
-    //AND THIS MUST EXECUTE
-    databaseManager.finishedDeleting()
-  }
 }

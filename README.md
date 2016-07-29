@@ -5,7 +5,7 @@ The Messages Attachment Manager is a Mac application that allows you to select a
 ### _How to use_
 Clone the directory and open the `Message Attachment Manager` in XCode. Build and Run.
 
-Currently, the application has not been deployed as a .app because of the reasons that I highlight in the bottom of [my post here](https://connormurray7.github.io/Message-Attachment-Manager/). That for every delete in the attachment table in the `chat.db` file, triggers need to be dropped and re-added due to user defined functions (UDFs). When loading the db, the functions that are embedded in the triggers are undefined because they were not saved in the table. If you're interested how the functions are created you can [read more here](http://www.sqlite.org/c3ref/create_function.html). If anyone has a more clever way around the UDF constraint, please let me know.
+Currently, the application has not been deployed as a .app because of the reasons that I highlight in the bottom of [my post here](https://connormurray.me/Message-Attachment-Manager/). That for every delete in the attachment table in the `chat.db` file, triggers need to be dropped and re-added due to user defined functions (UDFs). When loading the db, the functions that are embedded in the triggers are undefined because they were not saved in the table. If you're interested how the functions are created you can [read more here](http://www.sqlite.org/c3ref/create_function.html). If anyone has a more clever way around the UDF constraint, please let me know.
 
 ### _Credits_
 

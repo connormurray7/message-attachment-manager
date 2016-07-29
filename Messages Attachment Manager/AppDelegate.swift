@@ -3,9 +3,7 @@
  As described below, credit is given to Gabriel Miro for the MVC template in the SlidesMagic template
  And credit is given to Stephen Celis for the SQLite swift framework.
  
- I made some major adjustments to the software which are outlined in the README, but I generally 
- used the template that was provided from Gabriel
- 
+ I made some major adjustments to the software which are outlined in the README
  
   
 * AppDelegate.swift
